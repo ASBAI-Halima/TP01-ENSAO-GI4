@@ -22,7 +22,7 @@ public class GestionMaterielServiceImpl implements GestionMaterielService {
 	    public GestionMaterielServiceImpl(Factory factory){
 	        this.factory = factory;
 	    }
-    // bd goes here
+    // .....
 	
     @Override
     public void init() {
@@ -31,7 +31,7 @@ public class GestionMaterielServiceImpl implements GestionMaterielService {
 
     @Override
     public void listerMateriel() {
-       // System.out.println("Liste de matériel :\n 3 Livres \n 4 chaises");
+       // affichage du Liste de matériel 
     	for(Materiel m : factory.getListMateriel())
         {
             System.out.println(m.getName());

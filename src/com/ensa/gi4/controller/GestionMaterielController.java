@@ -23,13 +23,13 @@ public class GestionMaterielController {
     }
 
     public void afficherMenu() {
-        System.out.println("1- pour lister le matériel, entrer 1");
-        System.out.println("2- pour ajouter un nouveau matériel, entrer 2");
-        System.out.println("3- pour supprimer matériel, entrer 3");
-        System.out.println("4- pour modifier matériel, entrer 4");
-        System.out.println("0- pour sortir de l'application, entrer 0");
-        Scanner scanner = new Scanner(System.in);
-        String next = scanner.next();
+        System.out.println(" afficher la liste du matériel, taper 1");
+        System.out.println("  ajouter un nouveau matériel, taper 2");
+        System.out.println("  supprimer matériel, taper 3");
+        System.out.println("  modifier matériel, taper 4");
+        System.out.println("  sortir de l'application, taper 0");
+        Scanner input = new Scanner(System.in);
+        String next = input.next();
         if ("0".equals(next)) {
             sortirDeLApplication();
         } else if ("1".equals(next)) {
@@ -39,12 +39,12 @@ public class GestionMaterielController {
         }
         else if ("3".equals(next)) {
         	System.out.println("Veuillez saisir l'id");
-        	 int id= scanner.nextInt();
+        	 int id= input.nextInt();
         	supprimerMateriel(id);
         }
         else if ("4".equals(next)) {
         	System.out.println("Veuillez saisir l'id");
-        	 int id= scanner.nextInt();
+        	 int id= input.nextInt();
         	modifier(id);
         }else {
             System.out.println("choix invalide");

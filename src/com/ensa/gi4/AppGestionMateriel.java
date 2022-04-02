@@ -14,8 +14,8 @@ public class AppGestionMateriel {
 
     public static void main(String[] args) {
         final GestionMaterielController gestionMaterielController = APPLICATION_CONTEXT.getBean(GestionMaterielController.class);
-        while (true) { // pour que l'appliation tourne jusqu'Ã  la demande de l'utilisateur de l'arrÃªter
-            gestionMaterielController.afficherMenu();
+        while (true) { // pour que l'appliation tourne jusqu'à la demande de l'utilisateur de l'arrêter
+           gestionMaterielController.afficherMenu();
         }
 
     }

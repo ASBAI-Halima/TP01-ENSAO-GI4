@@ -1,126 +1,52 @@
 package com.ensa.gi4.service.impl;
 
-
-import java.util.Scanner;
-
-import com.ensa.gi4.datatabase.Factory;
-
-import com.ensa.gi4.modele.Chaise;
-import com.ensa.gi4.modele.Livre;
+import com.ensa.gi4.datatabase.MaterielDAO;
 import com.ensa.gi4.modele.Materiel;
-
 import com.ensa.gi4.service.api.GestionMaterielService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Scanner;
+
+@Component
 public class GestionMaterielServiceImpl implements GestionMaterielService {
-	 private Factory factory;
-	 private static int n=0;
-	  
 
+    // bd goes here
+    private MaterielDAO materiel;
 
-	    public GestionMaterielServiceImpl(Factory factory){
-	        this.factory = factory;
-	    }
-    // .....
-	
     @Override
     public void init() {
         System.out.println("inititialisation du service");
     }
 
     @Override
-    public void listerMateriel() {
-       // affichage du Liste de matériel 
-    	for(Materiel m : factory.getListMateriel())
-        {
-            System.out.println(m.getName());
-        }
+    public List<Materiel> getAllMateriels() {
+        return materiel.getAllMateriels();
     }
 
     @Override
-    public void ajouterNouveauMateriel() {
-    	Materiel materiel;
-    	   List<Materiel> list = factory.getListMateriel();
-    	   System.out.println("voulez vous ajouter chaise ou livre? ");
-    	   Scanner scanner = new Scanner(System.in);
-           String monMateriel = scanner.next();
-           if( monMateriel.equals("chaise")) {
-        	   materiel = new Chaise();
-        	   System.out.println("le nom : ");
-               String name = scanner.next();
-
-       		materiel.setName(name);
-       		materiel.setId(n++);
-               list.add(materiel);
-               factory.setListMateriel(list);
-        	   
-          }
-           else if( monMateriel.equals("livre")) {
-        	   materiel = new Livre();
-        	   System.out.println("le nom : ");
-               String name = scanner.next();
-
-       		materiel.setName(name);
-       		materiel.setId(n++);
-               list.add(materiel);
-               factory.setListMateriel(list);
-        	   
-          }
-           
-           else {
-        	   System.out.println("choix invalide");
-           }
-           
+    public void addMateriel(Materiel materiel) {
+        this.materiel.addMateriel(materiel);
     }
+
     @Override
-
-    public void supprimerMateriel(int id) {
-    	
-    	
-    		
-    		int i =0;
-    		int j=0;
-    		for(Materiel materiel : factory.getListMateriel()) {
-    			i++;
-    			if(materiel.getId() == id) {
-    				j=1;
-    				factory.getListMateriel().remove(i);
-    				System.out.println("votre materiel a bien �t� supprim�");
-    				break;
-    			}
-    		}
-    		
-    		factory. setListMateriel(factory.getListMateriel());
-    		if(j == 0) {
-    			System.out.println("le id que vous avez saisi n'exite pas dans notre shop");
-    		}
-    		
-    	
-    	
-    	
+    public void deleteMateriel(String nom) {
+        this.materiel.deleteMateriel(nom);
     }
 
-    public void modifier(int id) {
-	
-  Scanner scanner = new Scanner(System.in);
-  
-  String next ;
-  int a=0;
-for(Materiel m : factory.getListMateriel())
-  {
-      if(m.getId()==id) {
-    	  System.out.println("Le nouveau nom : ");
-    	   next = scanner.next();
-    	   m.setName(next);
-    	   a=1;
-      }
-     
-  }
-if(a==0) {
-	System.out.println("il n'existe pas");
-	}
-		
-	}
+    @Override
+    public Materiel getMateriel(String nom) {
+        return materiel.getMateriel(nom);
+    }
 
+    @Override
+    public void updateMateriel(String nom, Materiel materiel) {
+        this.materiel.updateMateriel(nom,materiel);
+    }
+
+    @Autowired
+    public void setMaterielDao(MaterielDAO materiel) {
+        // injection par accesseur
+        this.materiel = materiel;
+    }
 }
